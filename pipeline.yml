@@ -82,10 +82,10 @@ jobs:
               repository: config-commit
               merge: true
     - task: configure-authentication
-        image: platform-automation-image
-        file: platform-automation-tasks/tasks/configure-authentication.yml
-        attempts: 10
-        input_mapping:
-          env: interpolated-config
-          config: interpolated-config
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-authentication.yml
+      attempts: 10
+      input_mapping:
+        env: interpolated-config
+        config: interpolated-config
 
