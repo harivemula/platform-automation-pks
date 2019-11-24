@@ -39,6 +39,7 @@ jobs:
         CREDHUB_CLIENT: ((credhub-client))
         CREDHUB_SECRET: ((credhub-secret))
         CREDHUB_SERVER: https://10.1.0.6:8844
+        CREDHUB_CA_CERT: ((credhub-ca-cert))
         PREFIX: /concourse/main/foundation
       input_mapping:
         files: config
