@@ -121,7 +121,8 @@ jobs:
     input_mapping:
       config: interpolated-config
       env: interpolated-config
-
+    params:
+      VARS_FILES: config/vars.yml
 
 
 - name: apply-director-changes
