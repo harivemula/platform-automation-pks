@@ -8,6 +8,7 @@ opsman-configuration:
     vpc_subnet: ci-pks-infrastructure-subnet
     tags: ops-manager
     private_ip: 10.0.0.2
+    public_ip: 35.198.251.189
     ssh_public_key: ((opsman-ssh-pub))
  
 
