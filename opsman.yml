@@ -8,7 +8,7 @@ opsman-configuration:
     vpc_subnet: ci-pks-infrastructure-subnet
     tags: ops-manager
     private_ip: 10.0.0.2
-    ssh_public_key: ((opsman-ssh-pub))
+#    ssh_public_key: ((opsman-ssh-pub))
  
 
 # Note that as this contains a secret, it will need to be interpolated.
