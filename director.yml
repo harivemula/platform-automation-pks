@@ -54,7 +54,7 @@ properties-configuration:
     auth_json: ((gcp_opsman_sa_json))
     associated_service_account: 
   security_configuration:
-    trusted_certificates: 
+    trusted_certificates: ((domain-crt)) 
     generate_vm_passwords: true
     opsmanager_root_ca_trusted_certs: true
 resource-configuration:
