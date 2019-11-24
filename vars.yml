@@ -2,3 +2,7 @@
 credhub-server: https://10.1.0.6:8844/ 
 opsman-url: https://pcf.ci-pks.env1.k8scloud.cf
 pipeline-repo: "git@github.com:harivemula/platform-automation-pks.git"
+subdomain-name: ci-pks
+region: asia-southeast1
+az1: asia-southeast1-b
+

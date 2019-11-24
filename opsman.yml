@@ -1,14 +1,14 @@
 opsman-configuration:
   gcp:
-    gcp_service_account: ((gcp_service_account_json))
+    gcp_service_account: ((gcp_opsman_sa_json))
     project: pa-hvemula
-    region: asia-southeast1
-    zone: asia-southeast1-b
+    region: ((region))
+    zone: ((az1))
     vm_name: ops-manager-foundation
-    vpc_subnet: ci-pks-infrastructure-subnet
-    tags: ops-manager,ci-pks-ops-manager-external
+    vpc_subnet: ((subdomain-name))-infrastructure-subnet
+    tags: ((subdomain-name))-ops-manager-external
     private_ip: 10.0.0.2
-    public_ip: 35.198.251.189
+    public_ip: ((opsman_public_ip))
     ssh_public_key: ((opsman-ssh-pub))
  
 
