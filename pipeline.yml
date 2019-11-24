@@ -164,6 +164,8 @@ jobs:
         unpack: true
     - get: config
       passed: [apply-director-changes]
+  - task: credhub-interpolate
+    <<: *credhub-interpolate
   - task: export-installation
     image: platform-automation-image
     file: platform-automation-tasks/tasks/export-installation.yml
