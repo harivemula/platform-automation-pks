@@ -1,0 +1,14 @@
+opsman-configuration:
+  gcp:
+    gcp_service_account: ((gcp_service_account_json))
+    project: pa-hvemula
+    region: ap-southeast1
+    zone: ap-southeast1-b
+    vm_name: ops-manager-foundation
+    vpc_subnet: ci-pks-infrastructure-subnet
+    tags: ops-manager
+    private_ip: 10.0.0.2
+    ssh_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRE69o/8BIieK/S+xRAsILEXU3NtN5FHxvIQwKJuifVmefBiZ3M/QQdg6QEP9jrDBmdMIj4R0Ia39lvYJa8OXhsAjdbS6y1aKGOlJ+TdKDYh87cTteTzj9B4lCkO9oBJ1sCDpk3i/dt37pItaMGiQAXg8nvK4hrmSV/acLVwbvQXvFOu5A5TmjkeVMkNP3FPAI9rs5/gvXp9lKf0l60KtW3onRtaAPvfnyAQIXyp8Tc5fWN86Vf85akk2Nrhhbow2vHCLvRd9Z6tKzR4/EMFMswlg1URPheyyUazE03SrCgAY/A4oqZ2M/qPWLe8o53ah7Drvm/s82IGPPVkh3PH/L hvemula@linux-jumpbox
+
+# Note that as this contains a secret, it will need to be interpolated.
+# The gcp_service_account_json will need to be set in credhub.
