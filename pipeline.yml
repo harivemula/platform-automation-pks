@@ -56,7 +56,7 @@ jobs:
       image: platform-automation-image
       file: platform-automation-tasks/tasks/create-vm.yml
       params:
-        OPSMAN_CONFIG_FILE: config/opsman.yml
+        OPSMAN_CONFIG_FILE: opsman.yml
       input_mapping:
         config: interpolated-config
         state: config
