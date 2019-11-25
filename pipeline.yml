@@ -254,15 +254,19 @@ jobs:
   serial: true
   plan:
     - in_parallel:
-      - get: platform-automation-image
-        params:
-          unpack: true
-      - get: platform-automation-tasks
-        params:
-          unpack: true
-        passed:
-        - upload-and-stage-product
-      - get: config
+        - get: platform-automation-image
+          resource: platform-automation
+          params:
+            globs: ["*image*.tgz"]
+            unpack: true
+        - get: platform-automation-tasks
+          resource: platform-automation
+          params:
+            globs: ["*tasks*.zip"]
+            unpack: true
+          passed:
+          - upload-and-stage-product
+        - get: config
     - task: credhub-interpolate
       <<: *credhub-interpolate
     - task: configure-product
@@ -280,10 +284,14 @@ jobs:
   plan:
   - in_parallel:
     - get: platform-automation-image
+      resource: platform-automation
       params:
+        globs: ["*image*.tgz"]
         unpack: true
     - get: platform-automation-tasks
+      resource: platform-automation
       params:
+        globs: ["*tasks*.zip"]
         unpack: true
       passed: [configure-product-pks]
     - get: config
