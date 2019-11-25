@@ -192,3 +192,60 @@ jobs:
 #    params:
 #    repository: config-commit
 #      merge: true
+
+
+
+
+
+- name: upload-and-stage-product 
+  plan:
+  - aggregate:
+    - get: platform-automation-image
+      resource: platform-automation
+      params:
+        globs: ["*image*.tgz"]
+        unpack: true
+    - get: platform-automation-tasks
+      resource: platform-automation
+      params:
+        globs: ["*tasks*.zip"]
+        unpack: true
+    - get: config
+      passed: [configure-ops-manager]
+  - task: credhub-interpolate
+    <<: *credhub-interpolate
+  - task: download-product-and-stemcell
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/download-product.yml
+    input_mapping:
+      config: interpolated-config
+    params:
+      CONFIG_FILE: download-pks.yml
+    output_mapping: {downloaded-stemcell: product-stemcell}
+
+  - task: upload-product
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/upload-product.yml
+    input_mapping:
+      product: downloaded-product
+      env: interpolated-config
+    params:
+      ENV_FILE: env.yml
+  - task: upload-stemcell
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/upload-stemcell.yml
+    input_mapping:
+      stemcell: product-stemcell
+      env: interpolated-config
+    params:
+      ENV_FILE: env.yml
+  - task: stage-product
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/stage-product.yml
+    input_mapping:
+      product: downloaded-product
+      env: interpolated-config
+    params:
+      ENV_FILE: env.yml
+
+

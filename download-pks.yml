@@ -1,0 +1,7 @@
+---
+pivnet-api-token: ((pivnet-token))
+pivnet-file-glob: "pivotal-container-service-*.pivotal"
+pivnet-product-slug: pivotal-container-service
+product-version-regex: ^1\.5\.\d+$
+stemcell-iaas: google
+
