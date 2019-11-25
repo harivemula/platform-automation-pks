@@ -212,7 +212,7 @@ jobs:
       globs: ["*tasks*.zip"]
       unpack: true
   - get: config
-    passed: [configure-ops-manager]
+#    passed: [configure-ops-manager]
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: download-product-and-stemcell
@@ -248,5 +248,54 @@ jobs:
       env: interpolated-config
     params:
       ENV_FILE: env.yml
+
+
+- name: configure-product-pks
+  serial: true
+  plan:
+    - in_parallel:
+      - get: platform-automation-image
+          params:
+            unpack: true
+      - get: platform-automation-tasks
+          params:
+            unpack: true
+          passed:
+          - upload-and-stage-product
+      - get: configuration
+  - task: credhub-interpolate
+    <<: *credhub-interpolate
+  - task: configure-product
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/configure-product.yml
+    input_mapping:
+      config: interpolated-config
+      env: interpolated-config
+    params:
+      CONFIG_FILE: config/product-pks.yml 
+      ENV_FILE: env.yml
+
+- name: apply-product-changes
+  serial: true
+  plan:
+  - in_parallel:
+    - get: platform-automation-image
+        params:
+           unpack: true
+    - get: platform-automation-tasks
+        params:
+           unpack: true
+      passed: [configure-product-pks]
+    - get: configuration
+  - task: credhub-interpolate
+    <<: *credhub-interpolate
+  - task: apply-product-changes
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/apply-changes.yml
+    input_mapping:
+       env: interpolated-config
+    params:
+       ENV_FILE: env.yml
+
 
 
