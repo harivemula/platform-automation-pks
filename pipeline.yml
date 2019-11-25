@@ -263,17 +263,17 @@ jobs:
         passed:
         - upload-and-stage-product
       - get: config
-  - task: credhub-interpolate
-    <<: *credhub-interpolate
-  - task: configure-product
-    image: platform-automation-image
-    file: platform-automation-tasks/tasks/configure-product.yml
-    input_mapping:
-      config: interpolated-config
-      env: interpolated-config
-    params:
-      CONFIG_FILE: config/product-pks.yml 
-      ENV_FILE: env.yml
+    - task: credhub-interpolate
+      <<: *credhub-interpolate
+    - task: configure-product
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-product.yml
+      input_mapping:
+        config: interpolated-config
+        env: interpolated-config
+      params:
+        CONFIG_FILE: config/product-pks.yml 
+        ENV_FILE: env.yml
 
 - name: apply-product-changes
   serial: true
