@@ -262,7 +262,7 @@ jobs:
           unpack: true
         passed:
         - upload-and-stage-product
-      - get: configuration
+      - get: config
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: configure-product
@@ -286,7 +286,7 @@ jobs:
       params:
         unpack: true
       passed: [configure-product-pks]
-    - get: configuration
+    - get: config
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: apply-product-changes
