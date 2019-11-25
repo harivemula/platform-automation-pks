@@ -138,12 +138,10 @@ product-properties:
   .properties.worker_max_in_flight:
     value: 1
 network-properties:
-  network: 
-    name: pks
+  network: pks 
   other_availability_zones:
-  - name: ((az1))
-  service_network:
-    name: services
+  - ((az1))
+  service_network: services
   singleton_availability_zone:
     name: ((az1))
 resource-config:

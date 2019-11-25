@@ -276,8 +276,9 @@ jobs:
         config: interpolated-config
         env: interpolated-config
       params:
-        CONFIG_FILE: config/product-pks.yml 
+        CONFIG_FILE: product-pks.yml 
         ENV_FILE: env.yml
+        VARS_FILES: config/vars.yml
 
 - name: apply-product-changes
   serial: true
@@ -304,6 +305,7 @@ jobs:
        env: interpolated-config
     params:
        ENV_FILE: env.yml
+       VARS_FILES: config/vars.yml
 
 
 
