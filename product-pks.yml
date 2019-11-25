@@ -1,5 +1,9 @@
 product-name: pivotal-container-service
 product-properties:
+  .pivotal-container-service.pks_tls:
+     value:
+       cert_pem: ((pks_tls.certificate))
+       private_key_pem: ((pks_tls.private_key))
   .properties.bosh-metric-sink-node-exporter:
     value: false
   .properties.bosh-metric-sink-outputs:
