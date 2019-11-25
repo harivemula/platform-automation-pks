@@ -255,13 +255,13 @@ jobs:
   plan:
     - in_parallel:
       - get: platform-automation-image
-          params:
-            unpack: true
+        params:
+          unpack: true
       - get: platform-automation-tasks
-          params:
-            unpack: true
-          passed:
-          - upload-and-stage-product
+        params:
+          unpack: true
+        passed:
+        - upload-and-stage-product
       - get: configuration
   - task: credhub-interpolate
     <<: *credhub-interpolate
@@ -280,11 +280,11 @@ jobs:
   plan:
   - in_parallel:
     - get: platform-automation-image
-        params:
-           unpack: true
+      params:
+        unpack: true
     - get: platform-automation-tasks
-        params:
-           unpack: true
+      params:
+        unpack: true
       passed: [configure-product-pks]
     - get: configuration
   - task: credhub-interpolate
