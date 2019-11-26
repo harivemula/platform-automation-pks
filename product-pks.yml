@@ -144,6 +144,9 @@ product-properties:
     value: disabled
   .properties.worker_max_in_flight:
     value: 1
+  .properties.vm_extensions:
+    value:
+    - public_ip
 network-properties:
   network:
     name: pks
@@ -161,6 +164,8 @@ resource-config:
     instance_type:
       id: automatic
     internet_connected: true
+    elb_names:
+    - tcp: ci-pks-pks-api
 errand-config:
   delete-all-clusters:
     pre-delete-state: true
