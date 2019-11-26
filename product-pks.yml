@@ -165,7 +165,7 @@ resource-config:
       id: automatic
     internet_connected: true
     elb_names:
-    - tcp: ci-pks-pks-api
+    - tcp:ci-pks-pks-api
 errand-config:
   delete-all-clusters:
     pre-delete-state: true
