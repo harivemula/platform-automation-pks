@@ -18,6 +18,15 @@ resources:
     private_key: ((plat-auto-pipes-deploy-key.private_key))
     branch: master
 
+- name: installation
+  type: gcs
+  source:
+    regexp: installations/installation-(.*).zip
+    bucket: ((gcs-bucket))
+    json_key: |
+      ((gcp_service_account_json))
+
+
 credhub-interpolate: &credhub-interpolate
   image: platform-automation-image
   file: platform-automation-tasks/tasks/credhub-interpolate.yml
@@ -173,6 +182,12 @@ jobs:
       env: interpolated-config
     params:
       INSTALLATION_FILE: installation-$timestamp.zip
+  - put: installation
+    params:
+      file: installation/installation*.zip
+
+
+
 
 #  - task: make-commit
 #    image: platform-automation-image
