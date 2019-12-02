@@ -5,6 +5,12 @@ resource_types:
   source:
     repository: pivotalcf/pivnet-resource
     tag: latest-final
+
+- name: gcs
+  type: docker-image
+
+
+
 resources:
 - name: platform-automation
   type: pivnet
