@@ -5,4 +5,4 @@ pipeline-repo: "git@github.com:harivemula/platform-automation-pks.git"
 subdomain-name: ci-pks
 region: asia-southeast1
 az1: asia-southeast1-b
-gcs_bucket: pa-hvemula-opsmgr
+gcs-bucket: pa-hvemula-opsmgr
