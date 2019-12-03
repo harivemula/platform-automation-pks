@@ -110,7 +110,7 @@ jobs:
 
 - name: configure-ops-manager
   plan:
-  - aggregate:
+  - in_parallel:
     - get: platform-automation-image
       resource: platform-automation
       params:
@@ -145,7 +145,7 @@ jobs:
 
 - name: apply-director-changes
   plan:
-  - aggregate:
+  - in_parallel:
     - get: platform-automation-image
       resource: platform-automation
       params:
@@ -170,7 +170,7 @@ jobs:
 
 - name: export-installation 
   plan:
-  - aggregate:
+  - in_parallel:
     - get: platform-automation-image
       resource: platform-automation
       params:

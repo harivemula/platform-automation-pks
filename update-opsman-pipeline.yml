@@ -36,7 +36,7 @@ resources:
 - name: opsman-image
   type: pivnet
   source:
-    api_token: ((pivnet_token))
+    api_token: ((pivnet-token))
     product_slug: ops-manager
     product_version: 2.7.*
     sort_by: semver
@@ -102,6 +102,7 @@ jobs:
       ENV_FILE: env.yml
       OPSMAN_CONFIG_FILE: opsman.yml
       STATE_FILE: state.yml
+      VARS_FILES: config/vars.yml
     ensure:
       do:
         - task: make-commit
