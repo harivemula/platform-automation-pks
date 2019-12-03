@@ -52,7 +52,7 @@ jobs:
 - name: delete-foundation
   serial: true
   plan: 
-  - aggregate:
+  - in_parallel:
     - get: platform-automation-image
       resource: platform-automation
       params:
@@ -67,17 +67,21 @@ jobs:
 
   - task: credhub-interpolate
     <<: *credhub-interpolate
-  - task: export-installation
-    image: platform-automation-image
-    file: platform-automation-tasks/tasks/export-installation.yml
-    input_mapping:
-      env: interpolated-config
-    params:
-      ENV_FILE: env.yml
-      INSTALLATION_FILE: installation-$timestamp.zip
-  - put: installation
-    params:
-      file: installation/installation*.zip
+     
+  - try:
+      task: export-installation
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/export-installation.yml
+      input_mapping:
+        env: interpolated-config
+      params:
+        ENV_FILE: env.yml
+        INSTALLATION_FILE: installation-$timestamp.zip
+      on_success:
+        put: installation
+        params:
+          file: installation/installation*.zip
+  
   - task: delete-opsmanager-installation
     image: platform-automation-image
     file: platform-automation-tasks/tasks/delete-installation.yml
@@ -86,15 +90,17 @@ jobs:
     params:
       ENV_FILE: env.yml
 
+     
   - task: delete-opsmanager-vm
-    image: pcf-automation-image
-    file: pcf-automation-tasks/tasks/delete-vm.yml
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/delete-vm.yml
     input_mapping:
-      state: config
-      config: config
+      state: interpolated-config
+      config: interpolated-config
     params:
       OPSMAN_CONFIG_FILE: opsman.yml
       STATE_FILE: state.yml
+      VARS_FILES: config/vars.yml
     ensure:
       do:
         - task: make-commit
