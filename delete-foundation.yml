@@ -49,7 +49,7 @@ credhub-interpolate: &credhub-interpolate
     interpolated-files: interpolated-config
 
 jobs:
-- name: upgrade-opsmanager
+- name: delete-foundation
   serial: true
   plan: 
   - aggregate:
