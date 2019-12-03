@@ -60,6 +60,7 @@ jobs:
       params:
         globs: ["*image*.tgz"]
         unpack: true
+      trigger: true
     - get: platform-automation-tasks
       resource: platform-automation
       params:
@@ -122,6 +123,7 @@ jobs:
         unpack: true
     - get: config
       passed: [install-ops-manager]
+      trigger: true
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: configure-authentication
@@ -156,6 +158,7 @@ jobs:
         unpack: true
     - get: config
       passed: [configure-ops-manager]
+      trigger: true
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: apply-director-changes
@@ -180,6 +183,7 @@ jobs:
         unpack: true
     - get: config
       passed: [apply-director-changes]
+      trigger: true
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: export-installation
@@ -234,7 +238,8 @@ jobs:
       globs: ["*tasks*.zip"]
       unpack: true
   - get: config
-#    passed: [configure-ops-manager]
+    passed: ["export-installation"]
+    trigger: true
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: download-product-and-stemcell
@@ -288,6 +293,7 @@ jobs:
             unpack: true
           passed:
           - upload-and-stage-product
+          trigger: true
         - get: config
     - task: credhub-interpolate
       <<: *credhub-interpolate
@@ -317,6 +323,7 @@ jobs:
         globs: ["*tasks*.zip"]
         unpack: true
       passed: [configure-product-pks]
+      trigger: true
     - get: config
   - task: credhub-interpolate
     <<: *credhub-interpolate
