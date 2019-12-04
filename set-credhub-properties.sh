@@ -17,7 +17,7 @@ credhub set -n /concourse/team-a/gcp-pks-worker-sa -t value -v "$(terraform outp
 
 credhub set -n /concourse/team-a/ops_manager_dns -t value -v "$(terraform output -json | jq -r .ops_manager_dns.value)"
 
+credhub set -n /concourse/team-a/pks-api-fqdn -t value -v "$(terraform output -json | jq -r .pks_api_endpoint.value)"
 
-
-
+#credhub set -n /concourse/team-a/ops_manager_dns -t value -v "$(terraform output -json | jq -r .ops_manager_dns.value)"
 

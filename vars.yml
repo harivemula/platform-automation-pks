@@ -6,7 +6,7 @@ subdomain-name: ci-pks
 region: asia-southeast1
 az1: asia-southeast1-b
 gcs-bucket: pa-hvemula-opsmgr
-pks-api-fqdn: api.pks.ci-pks.env1.k8scloud.cf
-pks_lb_backend_name: ci-pks-pks-api
+#pks-api-fqdn: api.pks.ci-pks.env1.k8scloud.cf
+#pks-lb-backend-name: ci-pks-pks-api
 git-author-email: hari@harivemula.com
 credhub-prefix: /concourse/main/foundation
