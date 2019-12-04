@@ -5,7 +5,7 @@ network-assignment:
   network:
     name: infrastructure
   singleton_availability_zone:
-    name: asia-southeast1-b
+    name: ((az1))
 networks-configuration:
   icmp_checks_enabled: false
   networks:
