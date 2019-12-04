@@ -13,13 +13,13 @@ product-properties:
     selected_option: gcp
     value: GCP
   .properties.cloud_provider.gcp.master_service_account:
-    value: ci-pks-pks-master@pa-hvemula.iam.gserviceaccount.com
+    value: ((gcp-pks-master-sa)) 
   .properties.cloud_provider.gcp.network:
-    value: ci-pks-pcf-network
+    value: ((subdomain-name))-pcf-network
   .properties.cloud_provider.gcp.project_id:
-    value: pa-hvemula
+    value: ((gcp-project-id))
   .properties.cloud_provider.gcp.worker_service_account:
-    value: ci-pks-pks-worker@pa-hvemula.iam.gserviceaccount.com
+    value: ((gcp-pks-worker-sa)) 
   .properties.log_sink_resources_deploy:
     value: true
   .properties.metric_sink_resources_deploy:
@@ -43,7 +43,7 @@ product-properties:
     selected_option: disabled
     value: disabled
   .properties.pks_api_hostname:
-    value: api.pks.ci-pks.env1.k8scloud.cf
+    value: ((pks-api-fqdn))
   .properties.plan1_selector:
     selected_option: active
     value: Plan Active
@@ -68,7 +68,7 @@ product-properties:
     value: 0
   .properties.plan1_selector.active.master_az_placement:
     value:
-    - asia-southeast1-b
+    - ((az1))
   .properties.plan1_selector.active.master_instances:
     value: 1
   .properties.plan1_selector.active.max_worker_instances:
@@ -77,7 +77,7 @@ product-properties:
     value: small
   .properties.plan1_selector.active.worker_az_placement:
     value:
-    - asia-southeast1-b
+    - ((az1))
   .properties.plan1_selector.active.worker_instances:
     value: 1
   .properties.plan2_selector:
@@ -151,11 +151,11 @@ network-properties:
   network:
     name: pks
   other_availability_zones:
-  - name: asia-southeast1-b
+  - name: ((az1))
   service_network:
     name: pks-services
   singleton_availability_zone:
-    name: asia-southeast1-b
+    name: ((az1))
 resource-config:
   pivotal-container-service:
     instances: automatic
@@ -165,7 +165,7 @@ resource-config:
       id: automatic
     internet_connected: true
     elb_names:
-    - tcp:ci-pks-pks-api
+    - tcp:((pks_lb_backend_name))
 errand-config:
   delete-all-clusters:
     pre-delete-state: true

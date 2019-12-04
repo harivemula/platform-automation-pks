@@ -1,7 +1,7 @@
 opsman-configuration:
   gcp:
     gcp_service_account: ((gcp_opsman_sa_json))
-    project: pa-hvemula
+    project: ((gcp-project-id))
     region: ((region))
     zone: ((az1))
     vm_name: ops-manager-foundation
