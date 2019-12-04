@@ -59,7 +59,7 @@ jobs:
 - name: upgrade-opsmanager
   serial: true
   plan: 
-  - aggregate:
+  - in_parallel:
     - get: platform-automation-image
       resource: platform-automation
       params:

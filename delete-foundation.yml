@@ -82,6 +82,7 @@ jobs:
         params:
           file: installation/installation*.zip
   
+  
   - task: delete-opsmanager-installation
     image: platform-automation-image
     file: platform-automation-tasks/tasks/delete-installation.yml
