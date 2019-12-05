@@ -165,7 +165,7 @@ resource-config:
       id: automatic
     internet_connected: true
     elb_names:
-    - tcp:((subdomain-domain))-pks-api
+    - tcp:((subdomain-name))-pks-api
 errand-config:
   delete-all-clusters:
     pre-delete-state: true
