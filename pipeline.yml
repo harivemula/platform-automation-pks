@@ -295,6 +295,8 @@ jobs:
           - upload-and-stage-product
           trigger: true
         - get: config
+          passed: ["upload-and-stage-product"]
+          trigger: true
     - task: credhub-interpolate
       <<: *credhub-interpolate
     - task: configure-product
@@ -325,6 +327,8 @@ jobs:
       passed: [configure-product-pks]
       trigger: true
     - get: config
+      passed: ["configure-product-pks"]
+      trigger: true
   - task: credhub-interpolate
     <<: *credhub-interpolate
   - task: apply-product-changes
