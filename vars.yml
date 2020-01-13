@@ -1,12 +1,12 @@
 #platform-automation-bucket: 
 credhub-server: https://10.1.0.6:8844 
-opsman-url: https://pcf.ci-pks.env1.k8scloud.cf
+opsman-url: ${OPSMAN_URL}
 pipeline-repo: "git@github.com:harivemula/platform-automation-pks.git"
-subdomain-name: ci-pks
-region: asia-southeast1
-az1: asia-southeast1-b
-gcs-bucket: pa-hvemula-opsmgr
-pks-api-fqdn: api.pks.ci-pks.env1.k8scloud.cf
+subdomain-name: ${ENV_NAME}
+region: ${GCP_REGION}
+az1: ${GCP_AZ1}
+gcs-bucket: ${GCP_BUCKET_NAME}
+pks-api-fqdn: api.pks.${ENV_NAME}.${DNS_SUFFIX}
 #pks-lb-backend-name: ci-pks-pks-api
 git-author-email: hari@harivemula.com
-credhub-prefix: /concourse/main/foundation
+credhub-prefix: /concourse/main
