@@ -1,12 +1,12 @@
 #platform-automation-bucket: 
 credhub-server: https://10.1.0.6:8844 
-opsman-url: ${OPSMAN_URL}
+opsman-url: https://pcf.galaxy.env2.k8scloud.cf
 pipeline-repo: "git@github.com:harivemula/platform-automation-pks.git"
-subdomain-name: ${ENV_NAME}
-region: ${GCP_REGION}
-az1: ${GCP_AZ1}
-gcs-bucket: ${GCP_BUCKET_NAME}
-pks-api-fqdn: api.pks.${ENV_NAME}.${DNS_SUFFIX}
+subdomain-name: galaxy
+region: us-central1
+az1: us-central1-a
+gcs-bucket: pa-hvemula-opsmgr
+pks-api-fqdn: api.pks.galaxy.env2.k8scloud.cf
 #pks-lb-backend-name: ci-pks-pks-api
 git-author-email: hari@harivemula.com
 credhub-prefix: /concourse/main
