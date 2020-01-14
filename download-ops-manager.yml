@@ -3,4 +3,4 @@ pivnet-api-token: ((pivnet-refresh-token))
 pivnet-file-glob: "ops-manager-gcp*.yml"
 pivnet-product-slug: ops-manager
 #product-version-regex: ^2\.7\.\d+$
-product-version-regex: 2.7.5
+product-version-regex: 2.7.8
