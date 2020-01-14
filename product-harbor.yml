@@ -26,6 +26,8 @@ product-properties:
   .properties.registry_storage:
     selected_option: filesystem
     value: filesystem
+  .properties.server_cert_ca:
+    value: ((domain-crt))
   .properties.server_cert_key:
     value:
        cert_pem: ((pks_tls.certificate))
