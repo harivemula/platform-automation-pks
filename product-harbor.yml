@@ -26,10 +26,10 @@ product-properties:
   .properties.registry_storage:
     selected_option: filesystem
     value: filesystem
-.properties.server_cert_key:
+  .properties.server_cert_key:
     value:
-      cert_pem: ((pks_tls.certificate))
-      private_key_pem: ((pks_tls.private_key))
+       cert_pem: ((pks_tls.certificate))
+       private_key_pem: ((pks_tls.private_key))
   .properties.vm_monitor:
     selected_option: no_monitor
     value: no_monitor
