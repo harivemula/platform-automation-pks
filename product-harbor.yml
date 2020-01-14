@@ -26,6 +26,12 @@ product-properties:
   .properties.registry_storage:
     selected_option: filesystem
     value: filesystem
+.properties.server_cert_key:
+    value:
+      cert_pem: |
+        ((product-cert))
+      private_key_pem: |
+        ((product-private-key))
   .properties.vm_monitor:
     selected_option: no_monitor
     value: no_monitor
