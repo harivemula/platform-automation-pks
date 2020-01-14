@@ -1,0 +1,14 @@
+#platform-automation-bucket: 
+product-name: harbor
+product-url: harbor.galaxy.env2.k8scloud.cf
+credhub-server: https://10.1.0.6:8844 
+opsman-url: https://pcf.galaxy.env2.k8scloud.cf
+pipeline-repo: "git@github.com:harivemula/platform-automation-pks.git"
+subdomain-name: galaxy
+region: us-central1
+az1: us-central1-a
+gcs-bucket: pa-hvemula-opsmgr
+pks-api-fqdn: api.pks.galaxy.env2.k8scloud.cf
+#pks-lb-backend-name: ci-pks-pks-api
+git-author-email: hari@harivemula.com
+credhub-prefix: /concourse/main

@@ -1,0 +1,168 @@
+---
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+
+- name: gcs
+  type: docker-image
+  source:
+    repository: frodenas/gcs-resource
+
+
+resources:
+- name: platform-automation
+  type: pivnet
+  source:
+    product_slug: platform-automation
+    api_token: ((pivnet-refresh-token))
+- name: config
+  type: git
+  source:
+    uri: ((pipeline-repo))
+    private_key: ((plat-auto-pipes-deploy-key.private_key))
+    branch: master
+
+- name: installation
+  type: gcs
+  source:
+    regexp: installations/installation-(.*).zip
+    bucket: ((gcs-bucket))
+    json_key: |
+      ((gcp_service_account_json))
+
+
+credhub-interpolate: &credhub-interpolate
+  image: platform-automation-image
+  file: platform-automation-tasks/tasks/credhub-interpolate.yml
+  params:
+    CREDHUB_CLIENT: ((credhub-client))
+    CREDHUB_SECRET: ((credhub-secret))
+    CREDHUB_SERVER: ((credhub-server)) 
+    CREDHUB_CA_CERT: ((credhub-ca-cert))
+    PREFIX: ((credhub-prefix))
+  input_mapping:
+    files: config
+  output_mapping:
+    interpolated-files: interpolated-config
+
+
+jobs:
+
+- name: upload-and-stage-product-((product-name))
+  serial: true
+  plan:
+#  - aggregate:
+  - get: platform-automation-image
+    resource: platform-automation
+    params:
+      globs: ["*image*.tgz"]
+      unpack: true
+  - get: platform-automation-tasks
+    resource: platform-automation
+    params:
+      globs: ["*tasks*.zip"]
+      unpack: true
+  - get: config
+    trigger: true
+  - task: credhub-interpolate
+    <<: *credhub-interpolate
+  - task: download-product-and-stemcell
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/download-product.yml
+    input_mapping:
+      config: interpolated-config
+    params:
+      CONFIG_FILE: download-product-((product-name)).yml
+    output_mapping: {downloaded-stemcell: product-stemcell}
+
+  - task: upload-product
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/upload-product.yml
+    input_mapping:
+      product: downloaded-product
+      env: interpolated-config
+    params:
+      ENV_FILE: env.yml
+  - task: upload-stemcell
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/upload-stemcell.yml
+    input_mapping:
+      stemcell: product-stemcell
+      env: interpolated-config
+    params:
+      ENV_FILE: env.yml
+  - task: stage-product
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/stage-product.yml
+    input_mapping:
+      product: downloaded-product
+      env: interpolated-config
+    params:
+      ENV_FILE: env.yml
+
+
+- name: configure-product-((product-name))
+  serial: true
+  plan:
+    - in_parallel:
+        - get: platform-automation-image
+          resource: platform-automation
+          params:
+            globs: ["*image*.tgz"]
+            unpack: true
+        - get: platform-automation-tasks
+          resource: platform-automation
+          params:
+            globs: ["*tasks*.zip"]
+            unpack: true
+          passed:
+          - upload-and-stage-product-((product-name))
+          trigger: true
+        - get: config
+          trigger: true
+    - task: credhub-interpolate
+      <<: *credhub-interpolate
+    - task: configure-product
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/configure-product.yml
+      input_mapping:
+        config: interpolated-config
+        env: interpolated-config
+      params:
+        CONFIG_FILE: product-((product-name)).yml 
+        ENV_FILE: env.yml
+        VARS_FILES: config/vars-product.yml
+
+- name: apply-product-changes
+  serial: true
+  plan:
+  - in_parallel:
+    - get: platform-automation-image
+      resource: platform-automation
+      params:
+        globs: ["*image*.tgz"]
+        unpack: true
+    - get: platform-automation-tasks
+      resource: platform-automation
+      params:
+        globs: ["*tasks*.zip"]
+        unpack: true
+      passed: [configure-product-((product-name))]
+      trigger: true
+    - get: config
+  - task: credhub-interpolate
+    <<: *credhub-interpolate
+  - task: apply-product-changes
+    image: platform-automation-image
+    file: platform-automation-tasks/tasks/apply-changes.yml
+    input_mapping:
+       env: interpolated-config
+    params:
+       ENV_FILE: env.yml
+       VARS_FILES: config/vars-product.yml
+
+
+
