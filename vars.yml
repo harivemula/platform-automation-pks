@@ -10,3 +10,4 @@ pks-api-fqdn: api.pks.galaxy.env2.k8scloud.cf
 #pks-lb-backend-name: ci-pks-pks-api
 git-author-email: hari@harivemula.com
 credhub-prefix: /concourse/main
+upgrade-clusters: true
