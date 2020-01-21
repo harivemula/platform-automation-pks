@@ -23,7 +23,7 @@ resources:
   source:
     uri: ((pipeline-repo))
     private_key: ((plat-auto-pipes-deploy-key.private_key))
-    branch: master
+    branch: pks1.6
 
 - name: installation
   type: gcs
