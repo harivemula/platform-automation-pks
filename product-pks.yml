@@ -1,14 +1,26 @@
 product-name: pivotal-container-service
 product-properties:
-  .pivotal-container-service.pks_tls:
-     value:
-       cert_pem: ((pks_tls.certificate))
-       private_key_pem: ((pks_tls.private_key))
-  .properties.bosh-metric-sink-node-exporter:
+  .properties.bosh-metric-sink-etcd:
+    value: true
+  .properties.bosh-metric-sink-kube-apiserver:
+    value: false
+  .properties.bosh-metric-sink-kube-controller-manager:
+    value: false
+  .properties.bosh-metric-sink-kubelet:
+    value: false
+  .properties.bosh-metric-sink-node-exporter-master:
+    value: false
+  .properties.bosh-metric-sink-node-exporter-pks-api:
+    value: false
+  .properties.bosh-metric-sink-node-exporter-worker:
     value: false
   .properties.bosh-metric-sink-outputs:
     value: |
       [[outputs.discard]]
+  .pivotal-container-service.pks_tls:
+     value:
+       cert_pem: ((pks_tls.certificate))
+       private_key_pem: ((pks_tls.private_key))
   .properties.cloud_provider:
     selected_option: gcp
     value: GCP
@@ -128,6 +140,9 @@ product-properties:
   .properties.telemetry_selector:
     selected_option: disabled
     value: disabled
+  .properties.tmc:
+    selected_option: disabled
+    value: disabled  
   .properties.uaa:
     selected_option: internal
     value: internal
