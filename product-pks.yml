@@ -7,13 +7,13 @@ product-properties:
   .properties.bosh-metric-sink-kube-controller-manager:
     value: false
   .properties.bosh-metric-sink-kubelet:
-    value: false
+    value: true
   .properties.bosh-metric-sink-node-exporter-master:
-    value: false
+    value: true
   .properties.bosh-metric-sink-node-exporter-pks-api:
-    value: false
+    value: true
   .properties.bosh-metric-sink-node-exporter-worker:
-    value: false
+    value: true
   .properties.bosh-metric-sink-outputs:
     value: |
       [[outputs.discard]]
