@@ -32,7 +32,8 @@ resources:
       bucket: pivnet-files
       region_name: region
       secret_access_key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
-      regexp: \[ops-manager,(.*)\].*.ova 
+      regexp: \[ops-manager,(.*)\].*.ova
+      endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
 
 
 credhub-interpolate: &credhub-interpolate
