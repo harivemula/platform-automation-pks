@@ -24,7 +24,7 @@ resources:
     uri: ((pipeline-repo))
     private_key: ((plat-auto-pipes-deploy-key.private_key))
     branch: pks1.6
-    
+
 credhub-interpolate: &credhub-interpolate
   image: platform-automation-image
   file: platform-automation-tasks/tasks/credhub-interpolate.yml
@@ -62,7 +62,7 @@ jobs:
       <<: *credhub-interpolate
     - task: download-product
       image: platform-automation-image
-      file: platform-automation-tasks/tasks/download-product.yml
+      file: platform-automation-tasks/tasks/download-product-s3.yml
       params:
         CONFIG_FILE: download-ops-manager.yml
       input_mapping:
