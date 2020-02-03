@@ -34,8 +34,8 @@ resources:
       ((gcp_service_account_json))
 
 - name: opsman-image
-    type: s3
-    source:
+  type: s3
+  source:
       access_key_id: MKWP2KC73UCDRWFNQXDF
       bucket: pivnet-files
       region_name: region
