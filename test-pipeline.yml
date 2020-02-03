@@ -34,6 +34,7 @@ resources:
       secret_access_key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
       regexp: \[ops-manager,(.*)\].*.ova
       endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
+      skip_ssl_verification: true
 
 
 credhub-interpolate: &credhub-interpolate
