@@ -24,19 +24,7 @@ resources:
     uri: ((pipeline-repo))
     private_key: ((plat-auto-pipes-deploy-key.private_key))
     branch: pks1.6
-
-- name: opsman-product
-  type: s3
-  source:
-      access_key_id: MKWP2KC73UCDRWFNQXDF
-      bucket: pivnet-files
-      region_name: region
-      secret_access_key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
-      regexp: \[ops-manager,(.*)\].*.yml
-      endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
-      skip_ssl_verification: true
-
-
+    
 credhub-interpolate: &credhub-interpolate
   image: platform-automation-image
   file: platform-automation-tasks/tasks/credhub-interpolate.yml
@@ -74,20 +62,10 @@ jobs:
       <<: *credhub-interpolate
     - task: download-product
       image: platform-automation-image
-      file: platform-automation-tasks/tasks/download-product-s3.yml
+      file: platform-automation-tasks/tasks/download-product.yml
       params:
         CONFIG_FILE: download-ops-manager.yml
       input_mapping:
         config: interpolated-config
-      output_mapping:
-        downloaded-product: opsman-product
-    - task: create-vm
-      image: platform-automation-image
-      file: platform-automation-tasks/tasks/create-vm.yml
-      input_mapping:
-        image: opsman-product
-        state: configuration
-        config: interpolated-creds
-        vars: variable
-      params:
-        OPSMAN_CONFIG_FILE: download-ops-manager.yml
+
+    
