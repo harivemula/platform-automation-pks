@@ -81,3 +81,13 @@ jobs:
         config: interpolated-config
       output_mapping:
         downloaded-product: opsman-product
+    - task: create-vm
+      image: platform-automation-image
+      file: platform-automation-tasks/tasks/create-vm.yml
+      input_mapping:
+        image: opsman-product
+        state: configuration
+        config: interpolated-creds
+        vars: variable
+      params:
+        OPSMAN_CONFIG_FILE: download-ops-manager.yml
