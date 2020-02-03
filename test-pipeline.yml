@@ -25,15 +25,7 @@ resources:
     private_key: ((plat-auto-pipes-deploy-key.private_key))
     branch: master
 
-- name: installation
-  type: gcs
-  source:
-    regexp: installations/installation-(.*).zip
-    bucket: ((gcs-bucket))
-    json_key: |
-      ((gcp_service_account_json))
-
-- name: opsman-image
+- name: opsman-product
   type: s3
   source:
       access_key_id: MKWP2KC73UCDRWFNQXDF
@@ -85,7 +77,7 @@ jobs:
         CONFIG_FILE: download-ops-manager.yml
       input_mapping:
         config: interpolated-config
-   
-
-
-
+    - aggregate:
+      - put: opsman-product
+        params:
+          file: downloaded-product/*
