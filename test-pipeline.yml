@@ -32,7 +32,7 @@ resources:
       bucket: pivnet-files
       region_name: region
       secret_access_key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
-      regexp: \[ops-manager,(.*)\].*.ova
+      regexp: \[ops-manager,(.*)\].*.yml
       endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
       skip_ssl_verification: true
 
@@ -74,12 +74,10 @@ jobs:
       <<: *credhub-interpolate
     - task: download-product
       image: platform-automation-image
-      file: platform-automation-tasks/tasks/download-product.yml
+      file: platform-automation-tasks/tasks/download-product-s3.yml
       params:
         CONFIG_FILE: download-ops-manager.yml
       input_mapping:
         config: interpolated-config
-    - aggregate:
-      - put: opsman-product
-        params:
-          file: downloaded-product/*
+      output_mapping:
+        downloaded-product: opsman-product
