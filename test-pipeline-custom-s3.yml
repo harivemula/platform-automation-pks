@@ -65,7 +65,7 @@ jobs:
       file: platform-automation-tasks/tasks/download-product-s3.yml
       params:
         CONFIG_FILE: download-ops-manager.yml
-
+        CA_CERT: ((domain-crt))
       input_mapping:
         config: interpolated-config
 
