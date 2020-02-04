@@ -19,6 +19,7 @@ resources:
   source:
     bucket: pivnet-files
     region_name: region
+    access_key_id: MKWP2KC73UCDRWFNQXDF
     secret_access_key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
     endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
     skip_ssl_verification: true
@@ -29,6 +30,7 @@ resources:
   source:
     bucket: pivnet-files
     region_name: region
+    access_key_id: MKWP2KC73UCDRWFNQXDF
     secret_access_key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
     endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
     skip_ssl_verification: true
