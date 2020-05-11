@@ -2,6 +2,6 @@
 pivnet-api-token: ((pivnet-refresh-token))
 pivnet-file-glob: "harbor-container-registry*.pivotal"
 pivnet-product-slug: harbor-container-registry
-product-version-regex: ^1\.9\.\d+$
+product-version-regex: ^1\.10\.\d+$
 stemcell-iaas: google
 
