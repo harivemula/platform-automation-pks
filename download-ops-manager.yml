@@ -4,3 +4,11 @@ pivnet-file-glob: "ops-manager-gcp*.yml"
 pivnet-product-slug: ops-manager
 #product-version-regex: ^2\.7\.\d+$
 product-version-regex: 2.7.8
+
+s3-bucket: pivnet-files
+s3-region-name: 'region'
+s3-endpoint: minio.test-cluster-001.pks.galaxy.env2.k8scloud.cf
+s3-access-key-id: MKWP2KC73UCDRWFNQXDF
+s3-secret-access-key: nFJi4Mi4laJJxhocOwKlriitr9kHmOG2skp6UkTO
+s3-disable-ssl: false
+
